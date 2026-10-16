@@ -1,17 +1,10 @@
-# CC Portfolio Website Starter
+# CC Portfolio — Wix-reference inspired homepage
 
-A responsive, editorial-style UI/UX portfolio starter built with plain HTML, CSS, and JavaScript.
+This is an original implementation inspired by the screenshot's broad layout: compact top navigation, a wide centered hero with overlaid typography, a restrained intro, a three-column project gallery, and a minimal footer. It does not include Wix source code or their licensed photography.
 
-## Files
-- `index.html` — page structure and portfolio content
-- `style.css` — visual styling and responsive layout
-- `script.js` — small navigation interaction
-- `assets/images/` — place your project images here
-
-## Before publishing
-1. Replace `YOUR_EMAIL@example.com` with your professional email address.
-2. Replace the CSS placeholder project artwork with your real, approved project screenshots.
-3. Review all project descriptions and remove any confidential or NDA-restricted material.
-4. Publish through GitHub Pages: **Settings → Pages → Deploy from a branch → main → /(root) → Save**.
-
-This is an original starter layout inspired by a clean, editorial portfolio aesthetic. It is not an export or copy of the Wix template.
+## To customize
+1. Replace `CC DESIGN` with your preferred English name/wordmark.
+2. Replace `YOUR_EMAIL@example.com` with your professional email.
+3. The hero is currently a CSS placeholder. When ready, add your own approved wide image and update `.hero::before` in `style.css` to use it.
+4. Gallery thumbnails are CSS mockups. Replace them with approved project screenshots when ready.
+5. Upload/replace `index.html`, `style.css`, `script.js`, and `README.md` in the root of your existing `Portfolio_CC` repository and commit to `main`.

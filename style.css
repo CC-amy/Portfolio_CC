@@ -461,11 +461,15 @@ a {
    ================================================== */
 
 .site-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
   width: 100%;
-  margin-top: auto;
   padding: 16px 20px 25px;
   color: #999;
   text-align: center;
+  background: #fff;
 }
 
 /* 社群圖示排列 */

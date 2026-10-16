@@ -3,13 +3,28 @@
    01. Fonts & Design Tokens
    ================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;600&family=Playfair+Display:ital,wght@1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Noto+Serif+TC:wght@400;500;600&family=Playfair+Display:ital,wght@1,400&family=Raleway:wght@300;400;500;600&display=swap');
 
 :root {
+  --bg: #fff;
+  --surface: #fff;
   --ink: #333;
   --muted: #777;
+  --soft: #999;
   --line: #e5e5e5;
+  --label: #605e5e;
   --page-gutter: clamp(22px, 4vw, 68px);
+}
+
+/* 暫色模式：顏色取自 Hero 背景圖的深藍灰調性 */
+html[data-theme="dark"] {
+  --bg: #15171b;
+  --surface: #1c1f25;
+  --ink: #f1efe9;
+  --muted: #b7bac0;
+  --soft: #9aa0a8;
+  --line: #343841;
+  --label: #b7bac0;
 }
 
 
@@ -31,14 +46,29 @@ body {
   min-height: 100vh;
   margin: 0;
   color: var(--ink);
-  background: #fff;
-  font-family: "DM Sans", "Noto Sans TC", Arial, sans-serif;
+  background: var(--bg);
+  font-family: "Raleway", "Noto Serif TC", Arial, sans-serif;
   font-weight: 400;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+/* 中英文混排時，明確指定各自字體，避免 fallback 選字不一致 */
+.lang-en {
+  font-family: "Raleway", Arial, sans-serif;
+}
+
+.lang-zh {
+  font-family: "Noto Serif TC", serif;
+}
+
+/* 預留頂部空間，避免內容被固定導覽列蓋住 */
+main {
+  padding-top: 82px;
 }
 
 
@@ -47,18 +77,24 @@ a {
    ================================================== */
 
 .site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 28px;
+  width: 100%;
   height: 82px;
-  padding: 0 var(--page-gutter);
-  background: #fff;
+  padding: 0 calc(var(--page-gutter) + 24px);
+  background: var(--surface);
+  transition: background-color 0.3s ease;
 }
 
 .wordmark {
-  font-size: 15px;
-  font-weight: 400;
+  font-size: 16px;
+  font-weight: 300;
   letter-spacing: 0.2px;
   white-space: nowrap;
 }
@@ -70,13 +106,29 @@ a {
 }
 
 .navigation a {
-  color: #555;
-  font-size: 12px;
+  color: var(--ink);
+  font-size: 14px;
   font-weight: 400;
 }
 
 .navigation a:hover {
-  color: #999;
+  color: var(--soft);
+}
+
+/* 明暗模式切換按鈕 */
+.theme-toggle {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  letter-spacing: 0.4px;
+}
+
+.theme-toggle:hover {
+  color: var(--soft);
 }
 
 .menu-toggle {
@@ -84,7 +136,7 @@ a {
   border: 0;
   background: transparent;
   font: inherit;
-  font-size: 11px;
+  font-size: 14px;
   letter-spacing: 1px;
 }
 
@@ -99,46 +151,35 @@ a {
   place-items: center;
   overflow: hidden;
   width: calc(100% - var(--page-gutter) * 2);
-  min-height: clamp(360px, 42vw, 725px);
+  min-height: clamp(420px, 52vw, 860px);
   margin: 0 auto;
   background: #777a78;
 }
 
-/* Hero 背景色 */
+/* Hero 背景圖（放大範圍供視差位移，避免捲動露出邊界）；用 JS 計算的 translateY 讓背景比內容慢移動 */
 .hero::before {
   position: absolute;
-  inset: 0;
+  inset: -20% 0;
   content: "";
-  background: linear-gradient(
-    120deg,
-    #b9b9b5 0%,
-    #8f918f 38%,
-    #a8a7a0 70%,
-    #575753 100%
-  );
+  background-image: url("img/hero-bn.jpg");
+  background-size: cover;
+  background-position: center;
+  transform: translateY(var(--hero-parallax, 0px));
+  will-change: transform;
 }
 
-/* 背景光影效果 */
+/* 背景光影效果：上下柔化陰影 */
 .hero::after {
   position: absolute;
   inset: 0;
   content: "";
   opacity: 0.25;
-  background:
-    linear-gradient(
-      90deg,
-      transparent 0 14%,
-      rgba(255, 255, 255, 0.6) 14.2% 14.8%,
-      transparent 15% 82%,
-      rgba(20, 20, 20, 0.6) 82.2% 83%,
-      transparent 83.2%
-    ),
-    linear-gradient(
-      0deg,
-      rgba(0, 0, 0, 0.12),
-      transparent 45%,
-      rgba(0, 0, 0, 0.08)
-    );
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.12),
+    transparent 45%,
+    rgba(0, 0, 0, 0.08)
+  );
 }
 
 /* Hero 深色遮罩 */
@@ -146,30 +187,105 @@ a {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: rgba(22, 23, 22, 0.28);
+  background: rgba(22, 23, 22, 0.12);
 }
+
+/* Hero 背景光影效果：柔光帶偏右側波浪流動，不越過左側人像，不影響背景圖與文字 */
+.hero-smoke {
+  position: absolute;
+  top: -20%;
+  bottom: -20%;
+  left: 35%;
+  right: -30%;
+  z-index: 2;
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.3) 46%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0.3) 54%,
+    transparent 70%
+  );
+  filter: blur(36px);
+  opacity: 0.4;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  will-change: transform;
+  animation: hero-light-flow 8s linear infinite alternate;
+}
+
+/* 水平小範圍來回 + 上下交錯起伏，走出波浪流動的路徑；疊加滑鼠/捲動互動位移 */
+@keyframes hero-light-flow {
+  0% {
+    transform: translate(
+      calc(-6% + var(--smoke-mouse-x, 0px)),
+      calc(-5% + var(--smoke-mouse-y, 0px) + var(--smoke-scroll-y, 0px))
+    );
+  }
+  25% {
+    transform: translate(
+      calc(2% + var(--smoke-mouse-x, 0px)),
+      calc(4% + var(--smoke-mouse-y, 0px) + var(--smoke-scroll-y, 0px))
+    );
+  }
+  50% {
+    transform: translate(
+      calc(10% + var(--smoke-mouse-x, 0px)),
+      calc(-4% + var(--smoke-mouse-y, 0px) + var(--smoke-scroll-y, 0px))
+    );
+  }
+  75% {
+    transform: translate(
+      calc(4% + var(--smoke-mouse-x, 0px)),
+      calc(5% + var(--smoke-mouse-y, 0px) + var(--smoke-scroll-y, 0px))
+    );
+  }
+  100% {
+    transform: translate(
+      calc(-4% + var(--smoke-mouse-x, 0px)),
+      calc(-3% + var(--smoke-mouse-y, 0px) + var(--smoke-scroll-y, 0px))
+    );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-smoke {
+    animation: none;
+  }
+}
+
+
 
 /* Hero 標題 */
 .hero-title {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   padding: 24px;
   color: #fff;
   text-align: center;
+  /* 避開背景人物臉部，往右微調位置 */
+  transform: translateX(clamp(40px, 12vw, 170px));
 }
 
 .hero-title h1 {
   margin: 0;
-  font-size: clamp(26px, 3.1vw, 54px);
-  font-weight: 400;
+  font-family: "Raleway", sans-serif;
+  font-size: clamp(40px, 3.1vw, 54px);
+  font-weight: 100;
   letter-spacing: clamp(7px, 1.15vw, 19px);
 }
 
 .hero-title p {
-  margin: 22px 0 0;
-  font-size: clamp(8px, 0.9vw, 12px);
-  font-weight: 400;
-  letter-spacing: clamp(4px, 0.7vw, 10px);
+  margin: 28px 0 0;
+  font-family: "Raleway", sans-serif;
+  font-size: clamp(12px, 0.9vw, 12px);
+  font-weight: 100;
+  letter-spacing: clamp(1px, 0.3vw, 4px);
+}
+
+/* 手機版才斷行，桌機維持同一行 */
+.hero-break {
+  display: none;
 }
 
 
@@ -180,24 +296,34 @@ a {
 .text-section {
   width: min(470px, 82%);
   margin: 0 auto;
-  padding-top: 48px;
   text-align: center;
 }
 
 .section-label {
   display: block;
-  color: #777;
-  font-family: "Playfair Display", Georgia, serif;
-  font-size: 10px;
+  color: var(--label);
+  font-family: "didot_w01-italic", serif;
+  font-size: 18px;
   font-style: italic;
   letter-spacing: 0.4px;
 }
 
+/* 標籤上方的直線，拉開跟文字間的留白 */
+.section-label::before {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 56px;
+  margin: 0 auto 24px;
+  background: var(--line);
+}
+
 .text-section p {
   margin: 28px auto 0;
-  color: #666;
-  font-size: 12px;
+  color: var(--ink);
+  font-size: 20px;
   line-height: 1.9;
+  font-family: "Raleway", sans-serif;
 }
 
 /* 區塊之間的細線 */
@@ -206,7 +332,7 @@ a {
   width: 1px;
   height: 38px;
   margin: 30px auto 0;
-  background: #ddd;
+  background: var(--line);
 }
 
 
@@ -227,7 +353,7 @@ a {
 
 .section-heading p {
   margin: 12px 0 0;
-  color: #999;
+  color: var(--soft);
   font-size: 9px;
   letter-spacing: 1.6px;
 }
@@ -407,12 +533,12 @@ a {
   align-items: baseline;
   gap: 10px;
   padding: 10px 0 4px;
-  color: #555;
+  color: var(--ink);
   font-size: 10px;
 }
 
 .work-caption b {
-  color: #999;
+  color: var(--soft);
   font-size: 9px;
   font-weight: 400;
 }
@@ -450,8 +576,8 @@ a {
 .contact-section > a {
   display: inline-block;
   padding-bottom: 5px;
-  border-bottom: 1px solid #ccc;
-  color: #666;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
   font-size: 11px;
 }
 
@@ -467,9 +593,11 @@ a {
   z-index: 100;
   width: 100%;
   padding: 16px 20px 25px;
-  color: #999;
+  color: var(--soft);
   text-align: center;
-  background: #fff;
+  background: var(--surface);
+  font-family: "DM Sans", "Noto Serif TC", Arial, sans-serif;
+  transition: background-color 0.3s ease;
 }
 
 /* 社群圖示排列 */
@@ -481,16 +609,47 @@ a {
 }
 
 .social-links a {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
 }
 
 /* 版權文字 */
 .site-footer p {
-  margin: 12px 0 0;
+  margin: 4px 0 0;
   font-family: "Playfair Display", Georgia, serif;
-  font-size: 11px;
+  font-size: 14px;
   font-style: italic;
+}
+
+/* 懸浮回到頂部按鈕：捲動後才淡入顯示 */
+.back-to-top {
+  position: fixed;
+  right: 24px;
+  bottom: 100px;
+  z-index: 110;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--soft);
+  font-size: 18px;
+  font-weight: 600;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.2s ease;
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.back-to-top:hover {
+  transform: translateY(-3px);
 }
 
 
@@ -503,6 +662,10 @@ a {
   /* Header */
   .site-header {
     height: 64px;
+  }
+
+  main {
+    padding-top: 64px;
   }
 
   .menu-toggle {
@@ -519,7 +682,7 @@ a {
     display: none;
     flex-wrap: wrap;
     padding: 18px var(--page-gutter);
-    background: #fff;
+    background: var(--surface);
   }
 
   .navigation.is-open {
@@ -540,8 +703,13 @@ a {
   }
 
   .hero-title p {
+    font-size: 9px;
     letter-spacing: 3px;
     line-height: 1.8;
+  }
+
+  .hero-break {
+    display: block;
   }
 
   /* 作品集：手機版兩欄 */

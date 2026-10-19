@@ -5,9 +5,20 @@ if (toggle && nav) {
     const open = nav.classList.toggle("is-open");
     toggle.setAttribute("aria-expanded", String(open));
   });
+
+  // 點擊選單以外的範圍時自動收合
+  document.addEventListener("click", (event) => {
+    const isOpen = nav.classList.contains("is-open");
+    const clickedInsideNav = nav.contains(event.target);
+    const clickedToggle = toggle.contains(event.target);
+    if (isOpen && !clickedInsideNav && !clickedToggle) {
+      nav.classList.remove("is-open");
+      toggle.setAttribute("aria-expanded", "false");
+    }
+  });
 }
 
-// 明暗模式切換：記住使用者選擇，預設亮色
+// 明暗模式切換：優先使用使用者手動選擇的紀錄，沒有紀錄時依裝置系統設定
 const THEME_KEY = "cc-portfolio-theme";
 const themeToggle = document.querySelector(".theme-toggle");
 const applyTheme = (theme) => {
@@ -18,7 +29,9 @@ const applyTheme = (theme) => {
     themeToggle.setAttribute("aria-pressed", String(isDark));
   }
 };
-applyTheme(localStorage.getItem(THEME_KEY) === "dark" ? "dark" : "light");
+const savedTheme = localStorage.getItem(THEME_KEY);
+const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+applyTheme(savedTheme ? savedTheme : systemPrefersDark ? "dark" : "light");
 if (themeToggle) {
   themeToggle.addEventListener("click", () => {
     const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
@@ -103,4 +116,46 @@ if (backToTop) {
   };
   window.addEventListener("scroll", updateBackToTopVisibility, { passive: true });
   updateBackToTopVisibility();
+}
+
+// 作品集手風琴：沒有 hover 時自動輪流展開，hover 時停在滑鼠所在的區塊
+const portfolioGrid = document.querySelector(".work-grid");
+const workItems = portfolioGrid ? Array.from(portfolioGrid.querySelectorAll(".work")) : [];
+if (portfolioGrid && workItems.length > 0 && !prefersReducedMotion) {
+  const cycleInterval = 2800;
+  let activeIndex = 0;
+  let timerId = null;
+
+  const setActive = (index) => {
+    workItems.forEach((item, i) => {
+      item.classList.toggle("is-active", i === index);
+    });
+  };
+
+  const startCycle = () => {
+    stopCycle();
+    setActive(activeIndex);
+    timerId = window.setInterval(() => {
+      activeIndex = (activeIndex + 1) % workItems.length;
+      setActive(activeIndex);
+    }, cycleInterval);
+  };
+
+  const stopCycle = () => {
+    if (timerId !== null) {
+      window.clearInterval(timerId);
+      timerId = null;
+    }
+  };
+
+  portfolioGrid.addEventListener("pointerenter", () => {
+    stopCycle();
+    workItems.forEach((item) => item.classList.remove("is-active"));
+  });
+
+  portfolioGrid.addEventListener("pointerleave", () => {
+    startCycle();
+  });
+
+  startCycle();
 }

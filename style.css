@@ -315,7 +315,7 @@ main {
 .hero-cta-link {
   padding: 12px 20px;
   border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 2px;
+  border-radius: 6px;
   color: #fff;
   font-family: "Raleway", sans-serif;
   font-size: clamp(12px, 0.85vw, 13px);
@@ -356,7 +356,7 @@ main {
 .section-intro-subtitle {
   display: inline-block;
   color: var(--muted);
-  font-size: clamp(12px, 1vw, 16px);
+  font-size: clamp(14px, 1vw, 16px);
   letter-spacing: 4px;
 }
 
@@ -424,7 +424,7 @@ main {
 .work-grid {
   display: flex;
   gap: 16px;
-  height: clamp(360px, 46vw, 520px);
+  height: clamp(360px, 32vw, 520px);
 }
 
 /* 單一作品：flex-grow 控制展開/縮小比例 */
@@ -433,8 +433,8 @@ main {
   flex: 1 1 0;
   min-width: 0;
   overflow: hidden;
-  border-radius: 2px;
-  transition: flex-grow 0.8s ease-in-out;
+  border-radius: 6px;
+  transition: flex-grow 1.4s ease-in-out;
 }
 
 .work:hover,
@@ -467,14 +467,9 @@ main {
   pointer-events: none;
 }
 
-/* 背景圖：展開時稍微放大做出互動感 */
+/* 背景圖：不額外疊加縮放動畫，讓圖片單純跟著卡片寬度變化放大，避免兩種動畫節奏對不齊 */
 .work-image {
-  transition: transform 0.6s ease;
-}
-
-.work:hover .work-image,
-.work.is-active .work-image {
-  transform: scale(1.08);
+  transition: none;
 }
 
 /* 文字內容：index / eyebrow / 標題 / 說明 */
@@ -803,10 +798,20 @@ main {
     writing-mode: horizontal-tb;
   }
 
+  /* 手機版固定顯示小數字，不要展開時的空心大字轉換效果 */
+  .work:hover .work-index,
+  .work.is-active .work-index {
+    color: #fff;
+    -webkit-text-stroke: 0;
+    font-size: 18px;
+  }
+
   .work-desc {
-    margin-top: 10px;
+    margin-top: 8px;
     max-height: none;
     opacity: 1;
+    font-size: 12px;
+    letter-spacing: 2px;
   }
 
 }

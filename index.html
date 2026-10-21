@@ -1,155 +1,526 @@
 <!doctype html>
 <html lang="zh-Hant">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Portfolio_CC">
-  <title> CHUANG CHING </title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header class="site-header">
-    <a class="wordmark" href="#home">
-      CHUANG CHING
-    </a>
-    <button class="menu-toggle" aria-expanded="false" aria-label="切換導覽選單">
-      MENU
-    </button>
-    <nav class="navigation" aria-label="Main navigation">
-      <a href="#home">HOME</a>
-      <a href="#about">ABOUT</a>
-      <a href="#work">WORK</a>
-      <a href="#experience">EXPERIENCE</a>
-      <a href="#contact">CONTACT</a>
-      <button class="theme-toggle" type="button" aria-pressed="false">DARK</button>
-    </nav>
-  </header>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Portfolio_CC" />
+    <title>CHUANG CHING</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="wordmark" href="#home"> CHUANG CHING </a>
+      <button
+        class="menu-toggle"
+        aria-expanded="false"
+        aria-label="切換導覽選單"
+      >
+        MENU
+      </button>
+      <nav class="navigation" aria-label="Main navigation">
+        <a href="#home">HOME</a>
+        <a href="#about">ABOUT</a>
+        <a href="#work">WORK</a>
+        <a href="#experience">EXPERIENCE</a>
+        <a href="#contact">CONTACT</a>
+        <button class="theme-toggle" type="button" aria-pressed="false">
+          DARK
+        </button>
+      </nav>
+    </header>
 
-  <main>
-    <section class="hero" id="home" aria-label="CHUANG CHING Portfolio">
-      <!-- Replace the background in style.css with your own approved portfolio image when ready. -->
-      <div class="hero-overlay"></div>
-      <div class="hero-smoke" aria-hidden="true"></div>
-      <div class="hero-title">
-        <h1>Less, But better</h1>
-        <p> PRODUCT DESIGN • <br class="hero-break"> UI / UX DESIGNER </p>
-        <div class="hero-cta">
-          <a class="hero-cta-link" href="#work">EXPLORE MY WORK</a>
-          <a class="hero-cta-link" href="https://heyzine.com/flip-book/74b748d6f0.html" target="_blank" rel="noopener noreferrer">VIEW PORTFOLIO</a>
+    <main>
+      <section class="hero" id="home" aria-label="CHUANG CHING Portfolio">
+        <!-- Replace the background in style.css with your own approved portfolio image when ready. -->
+        <div class="hero-overlay"></div>
+        <div class="hero-smoke" aria-hidden="true"></div>
+        <div class="hero-title">
+          <h1>Less, But better</h1>
+          <p>
+            PRODUCT DESIGN • <br class="hero-break" />
+            UI / UX DESIGNER
+          </p>
+          <div class="hero-cta">
+            <a class="hero-cta-link" href="#work">EXPLORE MY WORK</a>
+            <a
+              class="hero-cta-link"
+              href="https://heyzine.com/flip-book/74b748d6f0.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              >VIEW PORTFOLIO</a
+            >
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="about" class="text-section">
-      <span class="section-label">
-        01 / about
-      </span>
-      <div class="section-intro">
-        <span class="lang-en section-intro-title">
-          Design with Purpose.
-        </span>
-        <br>
-        <span class="lang-zh section-intro-subtitle">
-          以使用者為核心，讓設計回應真實需求
-        </span>
-      </div>
-      <p>
-        <span class="lang-zh">
-          我相信好的設計，不只是視覺上的美感，更是將複雜的需求轉化為清晰、直覺且一致的使用體驗。
-          從資訊架構、操作流程到介面細節，我重視設計背後的邏輯，並在使用者需求、商業目標與實際執行之間取得平衡。
-        </span>
-      </p>
-      <p>
-        <span class="lang-zh">
-          我也持續探索 AI 輔助設計的可能性，將技術運用於概念探索與設計迭代，在維持設計品質的前提下，加速從想法到實際落地的過程。
-        </span>
-      </p>
-      <!-- <span class="divider" aria-hidden="true"></span> -->
-    </section>
-
-    <section id="work" class="work-section">
-      <div class="section-heading">
-        <span class="section-label">
-          02 / work
-        </span>
+      <section id="about" class="text-section">
+        <span class="section-label"> 01 / about </span>
         <div class="section-intro">
-        <span class="lang-en section-intro-title">
-          Clarity Through Design.
-        </span>
-        <br>
-        <span class="lang-zh section-intro-subtitle">
-          設計，讓複雜變清晰
-        </span>
-      </div>
-      </div>
-      <div class="work-grid">
-        <a class="work work-one" href="#contact">
-          <div class="work-image"></div>
-          <div class="work-content">
-            <span class="work-index lang-en">01</span>
-            <span class="work-eyebrow lang-en">FLASH SALE</span>
-            <h3 class="work-title lang-zh">限時搶購體驗</h3>
-            <p class="work-desc lang-zh">限時互動體驗 / 快速購買流程 / 操作效率提升</p>
-          </div>
-        </a>
-        <a class="work work-two" href="#contact">
-          <div class="work-image"></div>
-          <div class="work-content">
-            <span class="work-index lang-en">02</span>
-            <span class="work-eyebrow lang-en">SOCIAL COMMERCE</span>
-            <h3 class="work-title lang-zh">社群團購管理</h3>
-            <p class="work-desc lang-zh">社群互動 / 團單管理 / 多角色協作</p>
-          </div>
-        </a>
-        <a class="work work-three" href="#contact">
-          <div class="work-image"></div>
-          <div class="work-content">
-            <span class="work-index lang-en">03</span>
-            <span class="work-eyebrow lang-en">HUMAN–MACHINE INTERACTION</span>
-            <h3 class="work-title lang-zh">人機介面體驗</h3>
-            <p class="work-desc lang-zh">HMI 體驗重構 / 跨裝置一致性 / 操作介面優化</p>
-          </div>
-        </a>
-      </div>
-      <!-- <span class="divider" aria-hidden="true"></span> -->
-    </section>
+          <span class="lang-en section-intro-title">
+            Design with Purpose.
+          </span>
+          <br />
+          <span class="lang-zh section-intro-subtitle">
+            以使用者為核心，讓設計回應真實需求
+          </span>
+        </div>
+        <p>
+          <span class="lang-zh">
+            我相信好的設計，不只是視覺上的美感，更是將複雜的需求轉化為清晰、直覺且一致的使用體驗。
+            從資訊架構、操作流程到介面細節，我重視設計背後的邏輯，並在使用者需求、商業目標與實際執行之間取得平衡。
+          </span>
+        </p>
+        <p>
+          <span class="lang-zh">
+            我也持續探索 AI
+            輔助設計的可能性，將技術運用於概念探索與設計迭代，在維持設計品質的前提下，加速從想法到實際落地的過程。
+          </span>
+        </p>
+        <!-- <span class="divider" aria-hidden="true"></span> -->
+      </section>
 
-    <section id="experience" class="text-section">
-      <span class="section-label">
-        03 / experience
-      </span>
-      <p>
-        UX Research　·　Product Service Design　·　UI/UX Design　·　Design System
-      </p>
-      <!-- <span class="divider" aria-hidden="true"></span> -->
-    </section>
+      <section id="work" class="work-section">
+        <div class="section-heading">
+          <span class="section-label"> 02 / work </span>
+          <div class="section-intro">
+            <span class="lang-en section-intro-title">
+              Clarity Through Design.
+            </span>
+            <br />
+            <span class="lang-zh section-intro-subtitle">
+              設計，讓複雜變清晰
+            </span>
+          </div>
+        </div>
+        <div class="work-grid">
+          <div class="work-col">
+            <a class="work work-one" href="#contact">
+              <div class="work-image"></div>
+              <div class="work-content">
+                <span class="work-index lang-en">01</span>
+                <span class="work-eyebrow lang-en">FLASH SALE</span>
+                <h3 class="work-title lang-zh">限時搶購體驗</h3>
+              </div>
+            </a>
+            <div class="work-tags">
+              <span class="work-tag lang-zh">限時互動</span>
+              <span class="work-tag lang-zh">快速購買</span>
+              <span class="work-tag lang-zh">效率提升</span>
+            </div>
+            <p class="work-caption">
+              <span class="work-caption-label lang-en">PROBLEM</span>
+              <span class="work-caption-text lang-zh"
+                >限時活動中，繁複流程可能讓使用者錯失搶購時機。</span
+              >
+            </p>
+            <p class="work-caption">
+              <span class="work-caption-label lang-en">DECISION</span>
+              <span class="work-caption-text lang-zh"
+                >以彈窗整合快速購買操作，減少頁面跳轉與重複確認。</span
+              >
+            </p>
+            <p class="work-caption">
+              <span class="work-caption-label lang-en">RESULT</span>
+              <span class="work-caption-text lang-zh"
+                >簡化購買路徑，降低限時情境下的操作負擔。</span
+              >
+            </p>
+          </div>
+          <div class="work-col">
+            <a class="work work-two" href="#contact">
+              <div class="work-image"></div>
+              <div class="work-content">
+                <span class="work-index lang-en">02</span>
+                <span class="work-eyebrow lang-en">SOCIAL COMMERCE</span>
+                <h3 class="work-title lang-zh">社群團購管理</h3>
+              </div>
+            </a>
+            <div class="work-tags">
+              <span class="work-tag lang-zh">社群互動</span>
+              <span class="work-tag lang-zh">團單管理</span>
+              <span class="work-tag lang-zh">多角色協作</span>
+            </div>
+            <p class="work-caption">
+              <span class="work-caption-label lang-en">PROBLEM</span>
+              <span class="work-caption-text lang-zh"
+                >留言喊單難追蹤，訂單仰賴人工整理。</span
+              >
+            </p>
+            <p class="work-caption">
+              <span class="work-caption-label lang-en">DECISION</span>
+              <span class="work-caption-text lang-zh"
+                >整合 LINE +1 互動與店長、總部後台，串聯訂單資訊。</span
+              >
+            </p>
+            <p class="work-caption">
+              <span class="work-caption-label lang-en">RESULT</span>
+              <span class="work-caption-text lang-zh"
+                >建立訂單追蹤機制，降低人工處理與跨角色溝通成本。</span
+              >
+            </p>
+          </div>
+          <div class="work-col">
+            <a class="work work-three" href="#contact">
+              <div class="work-image"></div>
+              <div class="work-content">
+                <span class="work-index lang-en">03</span>
+                <span class="work-eyebrow lang-en"
+                  >HUMAN–MACHINE INTERACTION</span
+                >
+                <h3 class="work-title lang-zh">人機介面體驗</h3>
+              </div>
+            </a>
+            <div class="work-tags">
+              <span class="work-tag lang-en">HMI 體驗</span>
+              <span class="work-tag lang-zh">跨裝置一致性</span>
+              <span class="work-tag lang-zh">介面優化</span>
+            </div>
+            <p class="work-caption">
+              <span class="work-caption-label lang-en">PROBLEM</span>
+              <span class="work-caption-text lang-zh"
+                >Kiosk 與 Web 操作邏輯分散，缺乏一致的互動體驗。</span
+              >
+            </p>
+            <p class="work-caption">
+              <span class="work-caption-label lang-en">DECISION</span>
+              <span class="work-caption-text lang-zh"
+                >統整 Proximity 與 Hover
+                互動規則，建立共通的色彩、字體與元件規範。</span
+              >
+            </p>
+            <p class="work-caption">
+              <span class="work-caption-label lang-en">RESULT</span>
+              <span class="work-caption-text lang-zh"
+                >建立跨裝置一致的視覺語言與互動回饋。</span
+              >
+            </p>
+          </div>
+        </div>
+        <!-- <span class="divider" aria-hidden="true"></span> -->
+      </section>
 
-    <section id="contact" class="contact-section">
-      <span class="section-label">
-        04 / contact
-      </span>
-      <p>
-        Thank you for visiting.
-      </p>
-      <a href="mailto:YOUR_EMAIL@example.com">
-        YOUR_EMAIL@example.com
-      </a>
-    </section>
-  </main>
+      <section id="experience" class="experience-section">
+        <div class="section-heading">
+          <span class="section-label"> 03 / experience </span>
+          <div class="section-intro">
+            <span class="lang-en section-intro-title">
+              Bridging Design and Execution.
+            </span>
+            <br />
+            <span class="lang-zh section-intro-subtitle">
+              不只設計產品，更專注於將創意完美落地
+            </span>
+          </div>
+        </div>
+        <div class="exp-layout">
+          <div
+            class="exp-tabs"
+            role="tablist"
+            aria-label="Experience categories"
+          >
+            <button
+              class="exp-tab lang-en is-active"
+              type="button"
+              role="tab"
+              aria-selected="true"
+              aria-controls="exp-selected-works"
+              data-target="exp-selected-works"
+            >
+              Selected Works
+            </button>
+            <button
+              class="exp-tab lang-en"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              aria-controls="exp-methods"
+              data-target="exp-methods"
+            >
+              Methods
+            </button>
+            <button
+              class="exp-tab lang-en"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              aria-controls="exp-tools"
+              data-target="exp-tools"
+            >
+              Toolkit
+            </button>
+            <button
+              class="exp-tab lang-en"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              aria-controls="exp-education"
+              data-target="exp-education"
+            >
+              Education
+            </button>
+          </div>
+          <span class="exp-divider" aria-hidden="true"></span>
+          <div class="exp-panels">
+            <div
+              class="exp-panel is-active"
+              id="exp-selected-works"
+              role="tabpanel"
+            >
+              <div class="exp-cards">
+                <article class="exp-card">
+                  <h4 class="exp-card-title lang-zh">
+                    Lawdon Academy 律敦學院｜自由接案
+                  </h4>
+                  <p class="exp-card-list-label lang-zh">負責項目：</p>
+                  <ul class="exp-card-list lang-zh">
+                    <li>UIUX 設計規劃</li>
+                    <li>Wireframe、Mockup 設計</li>
+                    <li>Logo、EDM 設計</li>
+                    <li>客戶溝通與工程師協作</li>
+                    <li>後台銷售項目維運</li>
+                  </ul>
+                  <a
+                    class="exp-card-cta lang-en"
+                    href="https://lawdonacademy.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Visit Site</a
+                  >
+                </article>
+                <article class="exp-card">
+                  <h4 class="exp-card-title lang-zh">全家 ESG 官網</h4>
+                  <p class="exp-card-list-label lang-zh">專案負責內容：</p>
+                  <ul class="exp-card-list lang-zh">
+                    <li>UIUX 設計規劃</li>
+                    <li>CMS Design</li>
+                    <li>客戶溝通與工程師協作</li>
+                  </ul>
+                  <a
+                    class="exp-card-cta lang-en"
+                    href="https://www.family.com.tw/ESG/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Visit Site</a
+                  >
+                </article>
+                <article class="exp-card">
+                  <h4 class="exp-card-title lang-zh">全家 - 人力資源網</h4>
+                  <p class="exp-card-list-label lang-zh">專案負責內容</p>
+                  <ul class="exp-card-list lang-zh">
+                    <li>UIUX 設計規劃</li>
+                    <li>IA 架構與 Flow Chart 規劃</li>
+                    <li>Wireframe、Mockup 設計</li>
+                    <li>CMS Design</li>
+                  </ul>
+                  <a
+                    class="exp-card-cta lang-en"
+                    href="https://hrrecruit.family.com.tw/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Visit Site</a
+                  >
+                </article>
+                <article class="exp-card">
+                  <h4 class="exp-card-title lang-zh">
+                    FamilyMart APP 前後台設計
+                  </h4>
+                  <p class="exp-card-list-label lang-zh">專案負責內容</p>
+                  <ul class="exp-card-list lang-zh">
+                    <li>前台 (消費者) Icon、Banner 與 APP 介面設計</li>
+                    <li>店長後台使用者行為、操作流程與 UI/UX 規劃</li>
+                    <li>總部／管理者後台使用者行為、操作流程與 UI/UX 規劃</li>
+                    <li>多角色後台介面與操作體驗規劃</li>
+                    <li>Design System 建置與介面規範制定</li>
+                  </ul>
+                  <a
+                    class="exp-card-cta lang-en"
+                    href="https://apps.apple.com/tw/app/familymart/id431477571"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Visit Site</a
+                  >
+                </article>
+              </div>
+              <div class="exp-scrollbar" aria-hidden="true">
+                <span class="exp-scrollbar-thumb"></span>
+              </div>
+            </div>
+            <div class="exp-panel" id="exp-methods" role="tabpanel">
+              <div class="exp-methods-grid">
+                <div class="exp-method">
+                  <img
+                    class="exp-method-icon"
+                    src="img/M01.png"
+                    alt=""
+                    aria-hidden="true"
+                  />
+                  <h4 class="exp-method-title lang-en">
+                    Requirements &amp;<br />Scope Alignment
+                  </h4>
+                  <p class="exp-method-desc lang-zh">
+                    需求理解與<br />範圍對齊
+                  </p>
+                </div>
+                <div class="exp-method">
+                  <img
+                    class="exp-method-icon"
+                    src="img/M02.png"
+                    alt=""
+                    aria-hidden="true"
+                  />
+                  <h4 class="exp-method-title lang-en">
+                    Information<br />Architecture
+                  </h4>
+                  <p class="exp-method-desc lang-zh">
+                    資訊架構與<br />內容層級規劃
+                  </p>
+                </div>
+                <div class="exp-method">
+                  <img
+                    class="exp-method-icon"
+                    src="img/M03.png"
+                    alt=""
+                    aria-hidden="true"
+                  />
+                  <h4 class="exp-method-title lang-en">
+                    Workflow &amp;<br />Logic Planning
+                  </h4>
+                  <p class="exp-method-desc lang-zh">
+                    使用流程與<br />互動邏輯規劃
+                  </p>
+                </div>
+                <div class="exp-method">
+                  <img
+                    class="exp-method-icon"
+                    src="img/M04.png"
+                    alt=""
+                    aria-hidden="true"
+                  />
+                  <h4 class="exp-method-title lang-en">
+                    Cross-functional<br />Collaboration
+                  </h4>
+                  <p class="exp-method-desc lang-zh">
+                    跨部門溝通與<br />多角色協作
+                  </p>
+                </div>
+                <div class="exp-method">
+                  <img
+                    class="exp-method-icon"
+                    src="img/M05.png"
+                    alt=""
+                    aria-hidden="true"
+                  />
+                  <h4 class="exp-method-title lang-en">Design<br />System</h4>
+                  <p class="exp-method-desc lang-zh">
+                    設計規範<br />建立與交接
+                  </p>
+                </div>
+                <div
+                  class="exp-method exp-method-spacer"
+                  aria-hidden="true"
+                ></div>
+              </div>
+            </div>
+            <div class="exp-panel" id="exp-tools" role="tabpanel">
+              <div class="exp-tools-grid">
+                <div class="exp-tool-group">
+                  <h4 class="exp-tool-title lang-en">Design</h4>
+                  <span class="exp-tool-divider" aria-hidden="true"></span>
+                  <ul class="exp-tool-list lang-en">
+                    <li>Figma</li>
+                    <li>Adobe XD</li>
+                  </ul>
+                </div>
+                <div class="exp-tool-group">
+                  <h4 class="exp-tool-title lang-en">Visual</h4>
+                  <span class="exp-tool-divider" aria-hidden="true"></span>
+                  <ul class="exp-tool-list lang-en">
+                    <li>Photoshop</li>
+                    <li>Illustrator</li>
+                    <li>InDesign</li>
+                  </ul>
+                </div>
+                <div class="exp-tool-group">
+                  <h4 class="exp-tool-title lang-en">Planning</h4>
+                  <span class="exp-tool-divider" aria-hidden="true"></span>
+                  <ul class="exp-tool-list lang-en">
+                    <li>ClickUp</li>
+                    <li>Notion</li>
+                  </ul>
+                </div>
+                <div class="exp-tool-group">
+                  <h4 class="exp-tool-title lang-en">3D Design</h4>
+                  <span class="exp-tool-divider" aria-hidden="true"></span>
+                  <ul class="exp-tool-list lang-en">
+                    <li>Rhino</li>
+                    <li>Pro/E</li>
+                    <li>Keyshot</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="exp-panel" id="exp-education" role="tabpanel">
+              <div class="exp-bg">
+                <div class="exp-bg-group">
+                  <div class="exp-bg-item">
+                    <svg class="exp-bg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <rect x="3" y="7" width="18" height="13" rx="2" />
+                      <path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" />
+                      <path d="M3 13h18" />
+                    </svg>
+                    <div class="exp-bg-body">
+                      <h4 class="exp-bg-title lang-zh">資深多媒體設計師</h4>
+                      <p class="exp-bg-meta lang-en">2022/02 – Present</p>
+                      <p class="exp-bg-desc lang-zh">UI/UX 設計、需求釐清、跨部門協作、專案執行與視覺設計。</p>
+                    </div>
+                  </div>
+                  <div class="exp-bg-item">
+                    <svg class="exp-bg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <rect x="3" y="7" width="18" height="13" rx="2" />
+                      <path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" />
+                      <path d="M3 13h18" />
+                    </svg>
+                    <div class="exp-bg-body">
+                      <h4 class="exp-bg-title lang-zh">設計師｜Konijn Design Studio</h4>
+                      <p class="exp-bg-meta lang-en">2018/02 – 2022/02</p>
+                      <p class="exp-bg-desc lang-zh">產品設計、品牌視覺、Web/UIUX 設計與專案執行。</p>
+                    </div>
+                  </div>
+                </div>
+                <span class="exp-bg-divider" aria-hidden="true"></span>
+                <div class="exp-bg-item">
+                  <svg class="exp-bg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M22 10 12 5 2 10l10 5 10-5z" />
+                    <path d="M6 12v5c3 2.5 9 2.5 12 0v-5" />
+                    <path d="M22 10v6" />
+                  </svg>
+                  <div class="exp-bg-body">
+                    <h4 class="exp-bg-title lang-zh">銘傳大學｜創新設計與管理碩士班</h4>
+                    <p class="exp-bg-meta lang-en">Innovation Design and Management</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-  <footer class="site-footer">
-    <div class="social-links">
-      <a>CONTACT</a>
-    </div>
-    <span class="lang-en footer-email">
-      ccjob111@gmail.com
-    </span>
-    <!-- <p>© 2026 CC. Designed with intention.</p> -->
-  </footer>
-  <a class="back-to-top" href="#top" aria-label="Back to top">↑</a>
-  <script src="script.js"></script>
-</body>
+      <section id="contact" class="contact-section">
+        <span class="section-label"> 04 / contact </span>
+        <p>Thank you for visiting.</p>
+        <a href="mailto:YOUR_EMAIL@example.com"> YOUR_EMAIL@example.com </a>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="social-links">
+        <a>CONTACT</a>
+      </div>
+      <span class="lang-en footer-email"> ccjob111@gmail.com </span>
+      <!-- <p>© 2026 CC. Designed with intention.</p> -->
+    </footer>
+    <a class="back-to-top" href="#top" aria-label="Back to top">↑</a>
+    <script src="script.js"></script>
+  </body>
 </html>
-#experience {
-  padding-top: 42px;
-}
+#experience { padding-top: 42px; }

@@ -1,9 +1,8 @@
-
 /* ==================================================
    01. Fonts & Design Tokens
    ================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Noto+Serif+TC:wght@400;500;600&family=Playfair+Display:ital,wght@1,400&family=Raleway:wght@300;400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Noto+Serif+TC:wght@400;500;600&family=Playfair+Display:ital,wght@1,400&family=Raleway:wght@300;400;500;600&display=swap");
 
 :root {
   --bg: #fff;
@@ -13,11 +12,16 @@
   --soft: #999;
   --line: #e5e5e5;
   --label: #605e5e;
+  /* tab 選中狀態的強調色 */
+  --accent: #86a1ad;
   --page-gutter: clamp(22px, 4vw, 68px);
   /* 亮色版 Hero 圖，要換圖改這裡 */
   --hero-bg: url("img/hero-bg-light.jpg");
   /* 手機版展開選單的半透明底色 */
   --nav-bg: rgba(255, 255, 255, 0.65);
+  /* 商品卡淡淡的底色與陰影 */
+  --card-bg: rgba(0, 0, 0, 0.03);
+  --card-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
 }
 
 /* 暫色模式：顏色取自 Hero 背景圖的深藍灰調性 */
@@ -29,12 +33,15 @@ html[data-theme="dark"] {
   --soft: #9aa0a8;
   --line: #343841;
   --label: #b7bac0;
+  --accent: #9fb8c6;
   /* 暗色版 Hero 圖，要換圖改這裡 */
   --hero-bg: url("img/hero-bg-dark.jpg");
   /* 手機版展開選單的半透明底色 */
   --nav-bg: rgba(21, 23, 27, 0.65);
+  /* 商品卡淡淡的底色與陰影 */
+  --card-bg: rgba(255, 255, 255, 0.04);
+  --card-shadow: 0 0 8px rgba(0, 0, 0, 0.35);
 }
-
 
 /* ==================================================
    02. Global Styles
@@ -49,9 +56,9 @@ html {
 }
 
 /* 錨點跳轉時預留固定導覽列的高度，避免章節頂部被蓋住 */
-/*section[id] {
-  scroll-margin-top: 82px;
-}*/
+section[id] {
+  scroll-margin-top: 40px;
+}
 
 body {
   display: flex;
@@ -62,7 +69,9 @@ body {
   background: var(--bg);
   font-family: "Raleway", "Noto Serif TC", Arial, sans-serif;
   font-weight: 400;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 a {
@@ -87,7 +96,6 @@ main {
   /* 預留底部空間，避免內容被固定 footer 蓋住 */
   padding-bottom: 110px;
 }
-
 
 /* ==================================================
    03. Header & Navigation
@@ -143,7 +151,9 @@ main {
   font-size: 14px;
   cursor: pointer;
   letter-spacing: 0.4px;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .theme-toggle:hover {
@@ -160,7 +170,6 @@ main {
   letter-spacing: 1px;
   color: var(--ink);
 }
-
 
 /* ==================================================
    04. Hero
@@ -275,8 +284,6 @@ main {
   }
 }
 
-
-
 /* Hero 標題 */
 .hero-title {
   position: relative;
@@ -320,7 +327,9 @@ main {
   font-family: "Raleway", sans-serif;
   font-size: clamp(12px, 0.85vw, 13px);
   letter-spacing: 1px;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .hero-cta-link:hover {
@@ -332,7 +341,6 @@ main {
 .hero-break {
   display: none;
 }
-
 
 /* ==================================================
    05. About / Text Sections
@@ -397,7 +405,6 @@ main {
   background: var(--line);
 }
 
-
 /* ==================================================
    06. Work Section
    ================================================== */
@@ -423,26 +430,35 @@ main {
 /* 作品集：手風琴式展開排列，滑鼠移過的區塊展開、其他自動縮小 */
 .work-grid {
   display: flex;
+  align-items: flex-start;
   gap: 16px;
-  height: clamp(360px, 32vw, 520px);
 }
 
-/* 單一作品：flex-grow 控制展開/縮小比例 */
-.work {
+/* 單一欄位：flex-grow 控制展開/縮小比例，圖片與下方說明文字一起跟著變寬；
+   固定高度（卡片高度 + 預留展開文字的空間），不管有沒有展開都一樣高，避免忽高忽低；整個 section 本身不受影響，仍會跟著外層內容自動變高 */
+.work-col {
   position: relative;
   flex: 1 1 0;
   min-width: 0;
-  overflow: hidden;
-  border-radius: 6px;
+  height: calc(clamp(360px, 32vw, 520px) + 180px);
   transition: flex-grow 1.4s ease-in-out;
 }
 
-.work:hover,
-.work.is-active {
+.work-col:hover,
+.work-col.is-active {
   flex-grow: 2.6;
 }
 
-/* 作品預覽圖：鋪滿整個區塊的背景層 */
+/* 單一作品圖卡 */
+.work {
+  position: relative;
+  display: block;
+  height: clamp(360px, 28vw, 520px);
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+/* 作品預覽圖：鋪滿整個區塊的背景層，不額外疊加縮放動畫，讓圖片單純跟著卡片寬度變化放大 */
 .work-image {
   position: absolute;
   inset: 0;
@@ -451,6 +467,7 @@ main {
   overflow: hidden;
   background: #e9e8e3;
   isolation: isolate;
+  transition: none;
 }
 /* 深色漸層遮罩，讓白色文字在圖片上保持可讀性 */
 .work-image::after {
@@ -465,11 +482,6 @@ main {
     transparent 75%
   );
   pointer-events: none;
-}
-
-/* 背景圖：不額外疊加縮放動畫，讓圖片單純跟著卡片寬度變化放大，避免兩種動畫節奏對不齊 */
-.work-image {
-  transition: none;
 }
 
 /* 文字內容：index / eyebrow / 標題 / 說明 */
@@ -496,14 +508,14 @@ main {
 }
 
 @supports not (-webkit-text-stroke: 1px #fff) {
-  .work:hover .work-index,
-  .work.is-active .work-index {
+  .work-col:hover .work-index,
+  .work-col.is-active .work-index {
     color: #fff;
   }
 }
 
-.work:hover .work-index,
-.work.is-active .work-index {
+.work-col:hover .work-index,
+.work-col.is-active .work-index {
   color: transparent;
   -webkit-text-stroke: 1.5px #fff;
   font-size: 80px;
@@ -529,28 +541,27 @@ main {
   transition: writing-mode 0.5s ease;
 }
 
-/* 展開時改回橫書，並顯示完整說明文字 */
-.work-desc {
-  margin: 0;
-  overflow: hidden;
-  max-height: 0;
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 14px;
-  line-height: 1.7;
-  opacity: 0;
-  transition: max-height 0.6s ease, opacity 0.5s ease, margin-top 0.6s ease;
-}
-
-.work:hover .work-title,
-.work.is-active .work-title {
+/* 展開時改回橫書 */
+.work-col:hover .work-title,
+.work-col.is-active .work-title {
   writing-mode: horizontal-tb;
 }
 
-.work:hover .work-desc,
-.work.is-active .work-desc {
-  margin-top: 6px;
-  max-height: 120px;
-  opacity: 1;
+/* 商品卡下方的標籤 tag */
+.work-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.work-tag {
+  padding: 4px 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 0.5px;
 }
 
 /* 各作品背景圖 */
@@ -575,6 +586,45 @@ main {
   background-position: center;
 }
 
+/* 每張卡片下方的說明文字：縮合時隱藏，展開時才出現，靠左對齊，英文標題+中文內容同一行 */
+.work-caption {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: baseline;
+  margin: 0;
+  overflow: hidden;
+  max-height: 0;
+  padding: 0px;
+  text-align: left;
+  opacity: 0;
+  transition:
+    max-height 0.6s ease,
+    opacity 0.5s ease,
+    margin-top 0.6s ease;
+}
+
+.work-caption-label {
+  flex-shrink: 0;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 2px;
+}
+
+.work-caption-text {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+  letter-spacing: 1px;
+}
+
+.work-col:hover .work-caption,
+.work-col.is-active .work-caption {
+  margin-top: 12px;
+  max-height: 80px;
+  opacity: 1;
+}
 
 /* ==================================================
    07. Work Captions & Dividers
@@ -584,15 +634,334 @@ main {
   margin-top: 42px;
 }
 
-
 /* ==================================================
-   08. Clients / Experience
+   08. Experience
    ================================================== */
 
-#clients {
-  padding-top: 42px;
+.experience-section {
+  width: calc(100% - var(--page-gutter) * 2);
+  margin: 0 auto;
+  padding-top: 28px;
 }
 
+.experience-section > .section-label {
+  text-align: center;
+}
+
+/* 左邊 tab 清單、右邊切換內容，中間一條分隔線；固定高度是封裝在這個 tab 切換區本身，讓切換時不會忽大忽小；周圍的 section 本身仍是自動高度 */
+.exp-layout {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  height: 440px;
+  gap: clamp(32px, 6vw, 96px);
+}
+
+.exp-tabs {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  /* 補償卡片下方捲軸區（padding + 捲軸高度）佔掉的空間，讓最後一個 tab 對齊卡片的可見底邊 */
+  padding-bottom: 36px;
+  gap: 28px;
+}
+
+.exp-tab {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--soft);
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.exp-tab:hover,
+.exp-tab.is-active {
+  color: var(--ink);
+}
+
+.exp-divider {
+  width: 1px;
+  background: var(--line);
+}
+
+.exp-panels {
+  display: flex;
+  align-items: stretch;
+  min-width: 0;
+  text-align: left;
+}
+
+.exp-panel {
+  display: none;
+}
+
+/* 撐滿整個 440px 列高，不管哪個 tab 都一樣高；內容靠下對齊，內容太多時才在內部捲動 */
+.exp-panel.is-active {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+.exp-panel-title {
+  margin: 0 0 8px;
+  color: var(--ink);
+  font-size: clamp(16px, 1.6vw, 20px);
+}
+
+.exp-panel p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+/* Methods 專用的 5 欄圖示排版，置中對齊 */
+.exp-methods-grid {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+}
+
+.exp-method {
+  display: flex;
+  flex: 1 1 0;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.exp-method-icon {
+  width: clamp(80px, 9vw, 128px);
+  height: clamp(80px, 9vw, 128px);
+  object-fit: contain;
+}
+
+.exp-method-index {
+  margin-bottom: 14px;
+  color: var(--soft);
+  font-size: 12px;
+}
+
+.exp-method-title {
+  margin: 0 0 14px;
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.exp-method-desc {
+  margin: 0;
+  color: var(--soft);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* 當補位用，讓手機版兩欄換行時最後一列对齊，桌機版不需要就不顯示 */
+.exp-method-spacer {
+  display: none;
+}
+
+/* Tools 專用：標題 + 短底線 + 工具清單，三欄並排、靠左對齊 */
+.exp-tools-grid {
+  display: flex;
+  gap: clamp(80px, 9vw, 128px);
+  width: 100%;
+}
+
+.exp-tool-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.exp-tool-title {
+  margin: 0;
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+/* 底線比標題短，只是裝飾用的小分隔 */
+.exp-tool-divider {
+  width: 20px;
+  height: 1px;
+  margin: 12px 0 16px;
+  background: var(--line);
+}
+
+.exp-tool-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 2;
+  text-align: center;
+}
+
+/* Background 專用：左邊圖示、右邊職稱/日期/說明；同組項目之間用短分隔線（從文字欄開始），工作與學歷之間用整條分隔線 */
+.exp-bg {
+  width: 100%;
+}
+
+.exp-bg-item {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  column-gap: 24px;
+  align-items: start;
+}
+
+.exp-bg-icon {
+  width: 22px;
+  height: 22px;
+  margin-top: 21px;
+  color: var(--ink);
+}
+
+.exp-bg-body {
+  padding: 20px 0;
+}
+
+/*.exp-bg-item + .exp-bg-item .exp-bg-body {
+  border-top: 1px solid var(--line);
+}*/
+
+.exp-bg-title {
+  margin: 0 0 6px;
+  color: var(--ink);
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  line-height: 1.5;
+}
+
+.exp-bg-meta,
+.exp-bg-desc {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  letter-spacing: 1px;
+  line-height: 1.8;
+}
+
+.exp-bg-desc {
+  color: var(--ink);
+}
+
+.exp-bg-divider {
+  display: block;
+  height: 1px;
+  margin: 12px 0 28px;
+  background: var(--line);
+}
+
+/* Selected Works 專用的卡片式排版，橫向排列，超出寬度可左右捲動；上下留白要蓋過陰影的暈染範圍，避免被捲動容器裁掉 */
+.exp-cards {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+/* 隱藏瀏覽器原生捲軸，改用下方自製的短捲軸 */
+.exp-cards::-webkit-scrollbar {
+  display: none;
+}
+
+/* 自製捲軸：軌道固定短寬度、置中，滑塊寬度跟著 JS 算出的捲動比例移動 */
+.exp-scrollbar {
+  position: relative;
+  width: 120px;
+  height: 4px;
+  margin: 4px auto 0;
+  border-radius: 999px;
+  background: var(--line);
+}
+
+.exp-scrollbar-thumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--soft);
+}
+
+/* 內容沒有超出寬度、不需要捲動時就不顯示 */
+.exp-scrollbar.is-hidden {
+  display: none;
+}
+
+.exp-card {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  width: clamp(280px, 34vw, 380px);
+  padding: 24px;
+  background: var(--card-bg);
+  border-radius: 6px;
+  box-shadow: var(--card-shadow);
+}
+
+.exp-card-title {
+  margin: 0 0 20px;
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.exp-card-list-label {
+  margin: 0 0 4px;
+  color: var(--ink);
+  font-size: 14px;
+}
+
+.exp-card-list {
+  flex: 1 1 auto;
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+/* 星號用絕對定位放在最前面，li 用 padding-left 讓換行的文字跟第一行對齊，不會縮到星號下面 */
+.exp-card-list li {
+  position: relative;
+  padding-left: 1em;
+}
+
+.exp-card-list li::before {
+  content: "*";
+  position: absolute;
+  left: 0;
+}
+
+.exp-card-cta {
+  align-self: flex-start;
+  padding: 12px 20px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--ink);
+  font-size: clamp(12px, 0.85vw, 13px);
+  letter-spacing: 1px;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.exp-card-cta:hover {
+  background-color: var(--line);
+  border-color: var(--ink);
+}
 
 /* ==================================================
    09. Contact
@@ -618,7 +987,6 @@ main {
   font-size: 11px;
 }
 
-
 /* ==================================================
    10. Footer
    ================================================== */
@@ -639,7 +1007,7 @@ main {
 
 /* 社群連結文字樣式 */
 .social-links a {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
 }
 
@@ -647,6 +1015,7 @@ main {
 .footer-email {
   font-family: "Raleway", Arial, sans-serif;
   font-style: italic;
+  font-size: 14px;
 }
 
 /* 版權文字 */
@@ -675,7 +1044,9 @@ main {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.25s ease, transform 0.2s ease;
+  transition:
+    opacity 0.25s ease,
+    transform 0.2s ease;
 }
 
 .back-to-top.is-visible {
@@ -688,13 +1059,11 @@ main {
   transform: translateY(-3px);
 }
 
-
 /* ==================================================
    11. Responsive / Mobile
    ================================================== */
 
 @media (max-width: 700px) {
-
   /* Header */
   .site-header {
     height: 64px;
@@ -785,12 +1154,17 @@ main {
   /* 作品集：手機版改直式堆疊，手風琴效果靠 hover 在觸控裝置上不實用，改成直接顯示完整內容 */
   .work-grid {
     flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+
+  .work-col {
+    flex: none;
     height: auto;
-    gap: 14px;
   }
 
   .work {
-    flex: none;
     height: 220px;
   }
 
@@ -799,19 +1173,110 @@ main {
   }
 
   /* 手機版固定顯示小數字，不要展開時的空心大字轉換效果 */
-  .work:hover .work-index,
-  .work.is-active .work-index {
+  .work-col:hover .work-index,
+  .work-col.is-active .work-index {
     color: #fff;
     -webkit-text-stroke: 0;
     font-size: 18px;
   }
 
-  .work-desc {
-    margin-top: 8px;
+  /* 手機版沒有 hover，卡片下方的說明文字固定顯示；英文標題跟中文內容分開兩行 */
+  .work-caption {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    margin-top: 10px;
     max-height: none;
     opacity: 1;
-    font-size: 12px;
-    letter-spacing: 2px;
   }
 
+  /* 手機觸控點擊有時會觸發 :hover，這裡用同樣選擇器完全蓋掉，禁止任何位移動畫 */
+  .work-caption,
+  .work-col:hover .work-caption,
+  .work-col.is-active .work-caption {
+    transition: none;
+    margin-top: 10px;
+    max-height: none;
+    opacity: 1;
+  }
+
+  /* Experience：手機版 tab 改橫向排列在上方，內容在下方，取消中間直線；改回 flex 直式堆疊、高度自動避免浪費空間 */
+  .exp-layout {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    gap: 20px;
+  }
+
+  .exp-panels {
+    height: auto;
+  }
+
+  /* 手機版 tab：橫向一排、底下一條細線，選中的 tab 有粗底線與強調色；空間不夠時可左右滑動 */
+  .exp-tabs {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    padding-bottom: 0;
+    gap: 0;
+    overflow-x: auto;
+    border-bottom: 1px solid var(--line);
+    scrollbar-width: none;
+  }
+
+  .exp-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .exp-divider {
+    display: none;
+  }
+
+  .exp-tab {
+    flex: 1 0 auto;
+    margin-bottom: -1px;
+    padding: 12px 16px;
+    border-bottom: 3px solid transparent;
+    font-size: 14px;
+    text-align: center;
+    white-space: nowrap;
+    transition:
+      color 0.3s ease,
+      border-color 0.3s ease;
+  }
+
+  .exp-tab:hover {
+    color: var(--soft);
+  }
+
+  .exp-tab.is-active {
+    border-bottom-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* Methods：手機版螢幕太窄，5 欄改成換行排列 */
+  .exp-methods-grid {
+    flex-wrap: wrap;
+    row-gap: 28px;
+  }
+
+  .exp-method {
+    flex: 1 1 40%;
+  }
+
+  .exp-method-spacer {
+    display: flex;
+  }
+
+  /* Tools：手機版板塊跟 Methods 一樣，兩欄換行排列 */
+  .exp-tools-grid {
+    flex-wrap: wrap;
+    gap: 28px 16px;
+  }
+
+  .exp-tool-group {
+    flex: 1 1 40%;
+    min-width: 0;
+    text-align: center;
+  }
 }

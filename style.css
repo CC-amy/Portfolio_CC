@@ -648,7 +648,7 @@ main {
   text-align: center;
 }
 
-/* 左邊 tab 清單、右邊切換內容，中間一條分隔線；固定高度是封裝在這個 tab 切換區本身，讓切換時不會忽大忽小；周圍的 section 本身仍是自動高度 */
+/* 左邊 tab 清單、右邊切換內容 */
 .exp-layout {
   display: grid;
   grid-template-columns: auto auto 1fr;
@@ -964,22 +964,75 @@ main {
 }
 
 /* ==================================================
-   09. Contact
+   09. Capability
    ================================================== */
 
-.contact-section {
-  padding: 48px 20px 54px;
+.capability-section {
+  padding: 48px 20px 0px;
   text-align: center;
 }
 
-.contact-section > p {
+/* 能力卡片：三欄 x 兩列，共六張 */
+.capability-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(4px, 1vw, 16px);
+  width: calc(100% - var(--page-gutter) * 2);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 內距用 %（相對卡片寬），字級用 cqw，整張卡片等比縮放 */
+.capability-card {
+  container-type: inline-size;
+  position: relative;
+  aspect-ratio: 1200 / 770;
+  padding: 20% 6% 0 20%;
+  text-align: left;
+}
+
+/* 左上角背景大字母 */
+.capability-card::before {
+  content: attr(data-letter);
+  position: absolute;
+  top: 0;
+  left: 8cqw;
+  color: var(--line);
+  opacity: 0.5;
+  font-family: "Raleway", Arial, sans-serif;
+  font-size: 60cqw;
+  font-weight: 500;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.capability-title,
+.capability-desc {
+  position: relative;
+  margin: 0;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.capability-title {
+  margin-bottom: 16px;
+  font-size: 16px;
+}
+
+.capability-desc {
+  font-size: 14px;
+}
+
+.capability-section > p {
   margin: 25px 0 14px;
   font-family: "Playfair Display", Georgia, serif;
   font-size: 17px;
   font-style: italic;
 }
 
-.contact-section > a {
+.capability-section > a {
   display: inline-block;
   padding-bottom: 5px;
   border-bottom: 1px solid var(--line);
@@ -1063,6 +1116,12 @@ main {
    11. Responsive / Mobile
    ================================================== */
 
+@media (max-width: 1000px) {
+  .capability-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 700px) {
   /* Header */
   .site-header {
@@ -1079,6 +1138,10 @@ main {
 
   .menu-toggle {
     display: block;
+  }
+
+  .capability-grid {
+    grid-template-columns: 1fr;
   }
 
   /* 手機版導覽選單：從右半邊出現的側欄 */
@@ -1200,7 +1263,7 @@ main {
     opacity: 1;
   }
 
-  /* Experience：手機版 tab 改橫向排列在上方，內容在下方，取消中間直線；改回 flex 直式堆疊、高度自動避免浪費空間 */
+  /* Experience：手機版 tab 改橫向排列在上方，內容在下方 */
   .exp-layout {
     display: flex;
     flex-direction: column;
@@ -1212,7 +1275,7 @@ main {
     height: auto;
   }
 
-  /* 手機版 tab：橫向一排、底下一條細線，選中的 tab 有粗底線與強調色；空間不夠時可左右滑動 */
+  /* 手機版 tab：橫向一排，空間不夠時可左右滑動 */
   .exp-tabs {
     flex-direction: row;
     flex-wrap: nowrap;
@@ -1221,7 +1284,7 @@ main {
     gap: 0;
     overflow-x: auto;
     overflow-y: hidden;
-    overscroll-behavior-x: cantain;  
+    overscroll-behavior-x: contain;
     border-bottom: 1px solid var(--line);
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
